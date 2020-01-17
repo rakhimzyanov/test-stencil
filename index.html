@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>stencil</title>
+
+    <script type="module" src="./components/components.esm.js"></script>
+    <script nomodule src="./components/components.js"></script>
+
+</head>
+<body>
+    <h1>stencil components</h1>
+    <!-- <shared-button name="lala"></shared-button> -->
+    <div class="modal_container"></div>
+
+
+    <script>
+        let html = '';
+        for (let i = 0; i < 5000; i++) {
+            html += `
+                <my-modal id="modal_${i}">
+                    <p>it is${i}</p>
+                    <button class="close-btn" id="${i}">close</button>
+                </my-modal>
+                <button class="open-btn" id="${i}">Open Modal ${i}</button>
+            `
+        }
+        document.querySelector('.modal_container').innerHTML = html;
+
+        document.addEventListener('click', (e) => {
+            const id = e.target.id;
+            if (e.target.className === 'open-btn') {   
+                document.querySelector(`#modal_${id}`).open = true;
+            }
+            if (e.target.className === 'close-btn') {
+                document.querySelector(`#modal_${id}`).open = false;
+            }
+        });
+
+    </script>
+
+
+</body>
+</html>
